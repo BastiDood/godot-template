@@ -34,7 +34,7 @@ jobs:
             run: just fmt
           - name: Run Linters
             run: just lint
-          - name: Install addons and import project
+          - name: Install Addons + Import Project
             run: just
 
       - parallel:
