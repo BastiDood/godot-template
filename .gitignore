@@ -1,0 +1,11 @@
+/.godot/
+/reports/
+
+/.plugged/*
+!/.plugged/.gdignore
+
+/addons/*
+!/addons/gd-plug/
+
+/build/*/*
+!/build/*/.gdignore
