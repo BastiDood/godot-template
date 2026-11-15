@@ -56,3 +56,15 @@ gdscript/warnings/confusable_local_declaration=2
 gdscript/warnings/confusable_local_usage=2
 gdscript/warnings/confusable_capture_reassignment=2
 gdscript/warnings/confusable_temporary_modification=2
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
+
+[gdunit4]
+
+settings/test/test_lookup_folder=""
+settings/test/test_discovery=true
+settings/test/test_timeout_seconds=30
+settings/common/update_notification_enabled=false
+report/godot/push_error=true
