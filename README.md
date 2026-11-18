@@ -24,6 +24,9 @@ just
 
 # Open the project in the Godot editor.
 just open
+
+# Run the main scene without the editor.
+just run
 ```
 
 ## Adding Plugins

@@ -22,6 +22,10 @@ import:
 open:
 	godot --editor
 
+# Run the main scene without the editor.
+run:
+	{{ godot }}
+
 # Check formatting across the project.
 fmt:
 	gdstyle fmt --check .
