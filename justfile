@@ -22,6 +22,10 @@ import:
 open:
 	godot --editor
 
+# Serve the GDScript language server on `port` from a windowless editor, for external editors.
+lsp port="6005":
+	{{ godot }} --editor --headless --lsp-port {{ port }}
+
 # Run the main scene without the editor.
 run:
 	{{ godot }}

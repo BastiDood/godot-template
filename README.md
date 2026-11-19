@@ -29,6 +29,32 @@ just open
 just run
 ```
 
+## Using an External Editor
+
+The GDScript language server runs inside the Godot editor. `just lsp` starts the editor without a window, so external editors get completion, diagnostics, and go-to-definition without the full editor open.
+
+```bash
+# Serve the language server on Godot's default port, 6005.
+just lsp
+
+# Serve it on another port.
+just lsp 6008
+```
+
+For [Zed](https://zed.dev), install the [GDScript extension](https://github.com/GDQuest/zed-gdscript) and [Netcat](https://nmap.org/ncat/) as `nc` or `ncat` on the `PATH`. Keep `just lsp` running in a terminal, then run `editor: restart language server` in Zed to connect. The extension connects to `127.0.0.1:6005` by default, so another port also needs this in Zed's `settings.json`.
+
+```json
+{
+  "lsp": {
+    "gdscript": {
+      "binary": {
+        "arguments": ["127.0.0.1", "<port>"]
+      }
+    }
+  }
+}
+```
+
 ## Adding Plugins
 
 [gd-plug](https://github.com/imjp94/gd-plug) installs every addon declared in [`tools/plug.gd`](./tools/plug.gd). Installed addons are ignored by Git, so adding a plugin only changes `tools/plug.gd`, `project.godot`, and sometimes `export_presets.cfg`.
