@@ -1,0 +1,42 @@
+name: Export Build
+description: Exports one preset with `just build-preset` and uploads its build as an artifact.
+inputs:
+  preset:
+    description: Name of the export preset.
+    required: true
+  name:
+    description: Name of the artifact, which is also the build's directory under `build/`.
+    required: true
+  tarball:
+    description: Whether to upload a tarball, which keeps the executable bit that zipped artifacts drop.
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - name: Export Build
+      shell: bash
+      env:
+        PRESET: ${{ inputs.preset }}
+      run: just build-preset "$PRESET"
+    - name: Upload Build
+      if: ${{ !fromJSON(inputs.tarball) }}
+      uses: actions/upload-artifact@v7
+      with:
+        name: ${{ inputs.name }}
+        path: build/${{ inputs.name }}/
+        if-no-files-found: error
+        retention-days: 1
+    - name: Archive Build
+      if: ${{ fromJSON(inputs.tarball) }}
+      shell: bash
+      env:
+        NAME: ${{ inputs.name }}
+      run: tar --create --file="$RUNNER_TEMP/$NAME.tar" --directory="build/$NAME" --exclude=.gdignore .
+    - name: Upload Tarball
+      if: ${{ fromJSON(inputs.tarball) }}
+      uses: actions/upload-artifact@v7
+      with:
+        path: ${{ runner.temp }}/${{ inputs.name }}.tar
+        archive: false
+        if-no-files-found: error
+        retention-days: 1

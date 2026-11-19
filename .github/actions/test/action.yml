@@ -1,0 +1,15 @@
+name: Run Tests
+description: Runs every GdUnit4 suite and uploads its reports, including when a test fails.
+runs:
+  using: composite
+  steps:
+    - name: Run Unit Tests
+      shell: bash
+      run: just test
+    - name: Upload Test Reports
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v7
+      with:
+        name: test-reports
+        path: reports/
+        if-no-files-found: ignore

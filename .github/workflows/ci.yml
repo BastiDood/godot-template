@@ -41,18 +41,20 @@ jobs:
           - name: Run Type Checks
             run: just check
           - name: Run Unit Tests
-            run: just test
+            uses: ./.github/actions/test
           - name: Export Linux Build
-            run: just build-preset Linux
+            uses: ./.github/actions/export
+            with:
+              preset: Linux
+              name: linux
+              tarball: true
           - name: Export Windows Build
-            run: just build-preset "Windows Desktop"
+            uses: ./.github/actions/export
+            with:
+              preset: Windows Desktop
+              name: windows
           - name: Export Web Build
-            run: just build-preset Web
-
-      - name: Upload Test Reports
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: test-reports
-          path: reports/
-          if-no-files-found: ignore
+            uses: ./.github/actions/export
+            with:
+              preset: Web
+              name: web
